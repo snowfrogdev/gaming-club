@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:5001/gaming-club-a11b7/us-central1/api'
 };
 
 /*
