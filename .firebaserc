@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "gaming-club-a11b7"
+  },
+  "targets": {
+    "gaming-club-a11b7": {
+      "hosting": {
+        "game-voting": [
+          "gaming-club-a11b7"
+        ]
+      }
+    }
   }
 }

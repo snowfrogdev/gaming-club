@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@gaming-club/api-interfaces';
-import { environment } from '../environments/environment';
+import { AuthProvider } from 'ngx-auth-firebaseui';
 
 @Component({
   selector: 'gaming-club-root',
@@ -9,6 +8,6 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>(environment.apiUrl + '/hello');
+  providers = [AuthProvider.EmailAndPassword, AuthProvider.Google]
   constructor(private http: HttpClient) {}
 }
