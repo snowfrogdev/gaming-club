@@ -249,15 +249,23 @@
         }
       }
     },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
+    "election": {
+      "root": "libs/election",
+      "sourceRoot": "libs/election/src",
       "projectType": "library",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": ["libs/election/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/election"],
+          "options": {
+            "jestConfig": "libs/election/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
