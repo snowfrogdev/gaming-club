@@ -8,7 +8,7 @@ export class Election {
   private votingPeriod!: Period;
   private state: ElectionState = ElectionState.PendingNominations;
 
-  constructor(command: TriggerElection) {
+  constructor(command: TriggerElection, private now = () => new Date()) {
     this.electionAdministratorId = command.memberId;
     const nominationPeriod = new Period(command.nominationStart, command.nominationEnd);
     const votingPeriod = new Period(command.votingStart, command.votingEnd);
@@ -16,7 +16,8 @@ export class Election {
   }
 
   private setPeriods(nomination: Period, voting: Period): void {
-    if (!nomination.isBefore(voting)) throw RangeError('Voting period cannot precede or overlap nomination period.');
+    if (!nomination.isBeforePeriod(voting)) throw RangeError('Voting period cannot precede or overlap nomination period.');
+    if (!nomination.isAfterDate(this.now())) throw RangeError('Nomination period must be start at a future date.')
 
     this.nominationPeriod = nomination;
     this.votingPeriod = voting;

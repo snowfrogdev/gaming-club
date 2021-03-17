@@ -44,4 +44,49 @@ describe('Election', () => {
 
     expect(callback).not.toThrow();
   });
+
+  test('constructor should throw if nomination period start is the past', () => {
+    const now = () => new Date(2022, 1);
+    const command = new TriggerElection(
+      new MemberId('1'),
+      new Date(2021, 4),
+      new Date(2021, 5),
+      new Date(2021, 5),
+      new Date(2021, 6)
+    );
+
+    const callback = () => new Election(command, now);
+
+    expect(callback).toThrow();
+  })
+
+  test('constructor should throw if nomination period start is now', () => {
+    const now = () => new Date(2022, 4);
+    const command = new TriggerElection(
+      new MemberId('1'),
+      new Date(2021, 4),
+      new Date(2021, 5),
+      new Date(2021, 5),
+      new Date(2021, 6)
+    );
+
+    const callback = () => new Election(command, now);
+
+    expect(callback).toThrow();
+  });
+
+  test('constructor should not throw if nomination period start is in the future', () => {
+    const now = () => new Date(2020, 4);
+    const command = new TriggerElection(
+      new MemberId('1'),
+      new Date(2021, 4),
+      new Date(2021, 5),
+      new Date(2021, 5),
+      new Date(2021, 6)
+    );
+
+    const callback = () => new Election(command, now);
+
+    expect(callback).not.toThrow();
+  });
 });

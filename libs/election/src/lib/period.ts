@@ -4,7 +4,11 @@ export class Period {
     if (start.getTime() === end.getTime()) throw RangeError('Start date and end date cannot be identical.');
   }
 
-  isBefore(other: Period): boolean {
+  isBeforePeriod(other: Period): boolean {
     return this.end.getTime() <= other.start.getTime();
+  }
+
+  isAfterDate(date: Date): boolean {
+    return this.start > date;
   }
 }
