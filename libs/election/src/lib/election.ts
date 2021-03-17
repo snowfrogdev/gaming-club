@@ -1,24 +1,21 @@
-import { v4 as uuid } from 'uuid';
-import { Entity } from "./entity";
 import { MemberId } from "./member-id";
 import { TriggerElection } from "./trigger-election";
 
-export class Election extends Entity {
-  private id: ElectionId;
+export class Election {
   private electionAdministratorId: MemberId;
   private nominationPeriod: NominationPeriod;
   private votingPeriod: VotingPeriod;
+  private state: ElectionState = ElectionState.PendingNominations;
+
   constructor(command: TriggerElection) {
-    super();
-    this.id = new ElectionId(uuid());
     this.electionAdministratorId = command.memberId;
     this.nominationPeriod = new NominationPeriod(command.nominationStart, command.nominationEnd);
     this.votingPeriod = new VotingPeriod(command.votingStart, command.votingEnd);
   }
-}
 
-class ElectionId {
-  constructor(readonly id: string) { }
+  isInProgress(): boolean {
+    return this.state !== ElectionState.Cancelled && this.state !== ElectionState.Closed;
+  }
 }
 
 class NominationPeriod {
@@ -27,4 +24,13 @@ class NominationPeriod {
 
 class VotingPeriod {
   constructor(private start: Date, private end: Date) { }
+}
+
+enum ElectionState {
+  PendingNominations,
+  Nominations,
+  PendingVoting,
+  Voting,
+  Closed,
+  Cancelled
 }
