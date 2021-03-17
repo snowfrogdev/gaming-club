@@ -1,29 +1,28 @@
-import { MemberId } from "./member-id";
-import { TriggerElection } from "./trigger-election";
+import { MemberId } from './member-id';
+import { Period } from './period';
+import { TriggerElection } from './trigger-election';
 
 export class Election {
   private electionAdministratorId: MemberId;
-  private nominationPeriod: NominationPeriod;
-  private votingPeriod: VotingPeriod;
+  private nominationPeriod: Period;
+  private votingPeriod: Period;
   private state: ElectionState = ElectionState.PendingNominations;
 
   constructor(command: TriggerElection) {
     this.electionAdministratorId = command.memberId;
-    this.nominationPeriod = new NominationPeriod(command.nominationStart, command.nominationEnd);
-    this.votingPeriod = new VotingPeriod(command.votingStart, command.votingEnd);
+    this.nominationPeriod = new Period(
+      command.nominationStart,
+      command.nominationEnd
+    );
+    this.votingPeriod = new Period(command.votingStart, command.votingEnd);
   }
 
   isInProgress(): boolean {
-    return this.state !== ElectionState.Cancelled && this.state !== ElectionState.Closed;
+    return (
+      this.state !== ElectionState.Cancelled &&
+      this.state !== ElectionState.Closed
+    );
   }
-}
-
-class NominationPeriod {
-  constructor(private start: Date, private end: Date) { }
-}
-
-class VotingPeriod {
-  constructor(private start: Date, private end: Date) { }
 }
 
 enum ElectionState {
@@ -32,5 +31,5 @@ enum ElectionState {
   PendingVoting,
   Voting,
   Closed,
-  Cancelled
+  Cancelled,
 }
