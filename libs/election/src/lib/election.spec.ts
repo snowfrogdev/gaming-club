@@ -1,3 +1,4 @@
+import { ClubId } from './club';
 import { Election } from './election';
 import { MemberId } from './member-id';
 import { TriggerElection } from './trigger-election';
@@ -5,6 +6,7 @@ import { TriggerElection } from './trigger-election';
 describe('Election', () => {
   test('constructor should throw if voting period starts before nomination period ends', () => {
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 7),
@@ -19,6 +21,7 @@ describe('Election', () => {
 
   test('constructor should not throw if voting period starts after nomination period ends', () => {
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
@@ -33,6 +36,7 @@ describe('Election', () => {
 
   test('constructor should not throw if voting period starts at nomination period end', () => {
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
@@ -48,6 +52,7 @@ describe('Election', () => {
   test('constructor should throw if nomination period start is the past', () => {
     const now = () => new Date(2022, 1);
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
@@ -63,6 +68,7 @@ describe('Election', () => {
   test('constructor should throw if nomination period start is now', () => {
     const now = () => new Date(2022, 4);
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
@@ -78,6 +84,7 @@ describe('Election', () => {
   test('constructor should not throw if nomination period start is in the future', () => {
     const now = () => new Date(2020, 4);
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),

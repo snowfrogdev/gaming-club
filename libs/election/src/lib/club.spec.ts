@@ -8,6 +8,7 @@ describe('Club', () => {
   it('.triggerElection() should create a new Election', () => {
     const club = new Club(new ClubId('1'));
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
@@ -26,6 +27,7 @@ describe('Club', () => {
     const club = new Club(new ClubId('1'), new Set([election]));
 
     const command = new TriggerElection(
+      new ClubId('1'),
       new MemberId('1'),
       new Date(2021, 4),
       new Date(2021, 5),
