@@ -1,7 +1,7 @@
-import { Club } from "./club";
-import { ClubRepository } from "./club.repository";
-import { CommandService } from "./command.service";
-import { TriggerElection } from "./trigger-election";
+import { ClubRepository } from './club.repository';
+import { CommandService } from './command.service';
+import { Club } from './domain/model/club/club';
+import { TriggerElection } from './domain/model/club/trigger-election';
 
 export class TriggerElectionService implements CommandService<TriggerElection> {
   constructor(private clubRepo: ClubRepository) {}

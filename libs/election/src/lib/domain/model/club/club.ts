@@ -1,5 +1,6 @@
-import { Election } from './election';
-import { Entity } from './entity';
+import { Election } from '../election/election';
+import { Entity } from '../entity';
+import { ClubId } from './club-id';
 import { TriggerElection } from './trigger-election';
 
 export class Club extends Entity {
@@ -20,8 +21,4 @@ export class Club extends Entity {
 
     this._elections.add(new Election(command));
   }
-}
-
-export class ClubId {
-  constructor(private id: string) {}
 }

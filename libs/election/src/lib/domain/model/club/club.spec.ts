@@ -1,7 +1,8 @@
 import { mock } from 'jest-mock-extended';
-import { Club, ClubId } from './club';
-import { Election } from './election';
-import { MemberId } from './member-id';
+import { Election } from '../election/election';
+import { MemberId } from '../election/member-id';
+import { Club } from './club';
+import { ClubId } from './club-id';
 import { TriggerElection } from './trigger-election';
 
 describe('Club', () => {

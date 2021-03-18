@@ -1,6 +1,6 @@
+import { TriggerElection } from '../club/trigger-election';
 import { MemberId } from './member-id';
 import { Period } from './period';
-import { TriggerElection } from './trigger-election';
 
 export class Election {
   private electionAdministratorId: MemberId;
@@ -16,8 +16,9 @@ export class Election {
   }
 
   private setPeriods(nomination: Period, voting: Period): void {
-    if (!nomination.isBeforePeriod(voting)) throw RangeError('Voting period cannot precede or overlap nomination period.');
-    if (!nomination.isAfterDate(this.now())) throw RangeError('Nomination period must be start at a future date.')
+    if (!nomination.isBeforePeriod(voting))
+      throw RangeError('Voting period cannot precede or overlap nomination period.');
+    if (!nomination.isAfterDate(this.now())) throw RangeError('Nomination period must be start at a future date.');
 
     this.nominationPeriod = nomination;
     this.votingPeriod = voting;

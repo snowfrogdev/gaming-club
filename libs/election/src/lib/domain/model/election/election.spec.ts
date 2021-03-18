@@ -1,7 +1,7 @@
-import { ClubId } from './club';
+import { ClubId } from '../club/club-id';
+import { TriggerElection } from '../club/trigger-election';
 import { Election } from './election';
 import { MemberId } from './member-id';
-import { TriggerElection } from './trigger-election';
 
 describe('Election', () => {
   test('constructor should throw if voting period starts before nomination period ends', () => {
@@ -63,7 +63,7 @@ describe('Election', () => {
     const callback = () => new Election(command, now);
 
     expect(callback).toThrow();
-  })
+  });
 
   test('constructor should throw if nomination period start is now', () => {
     const now = () => new Date(2022, 4);

@@ -1,5 +1,5 @@
-import { ClubId } from "./club";
-import { MemberId } from "./member-id";
+import { MemberId } from '../election/member-id';
+import { ClubId } from './club-id';
 
 export class TriggerElection {
   constructor(
@@ -9,5 +9,5 @@ export class TriggerElection {
     readonly nominationEnd: Date,
     readonly votingStart: Date,
     readonly votingEnd: Date
-  ) { }
+  ) {}
 }
