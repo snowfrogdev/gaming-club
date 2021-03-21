@@ -61,3 +61,23 @@ describe('LessThan', () => {
   });
 });
 
+describe('LessThanOrEqualTo', () => {
+  it('returns true when candidate is smaller than value', () => {
+    const greaterThanFive = new Specifications.LessThanOrEqualTo(10);
+
+    expect(greaterThanFive.isSatisfiedBy(3)).toBeTruthy();
+  });
+
+  it('returns true when candidate is equal to value', () => {
+    const greaterThanTen = new Specifications.LessThanOrEqualTo(0);
+
+    expect(greaterThanTen.isSatisfiedBy(0)).toBeTruthy();
+  });
+
+  it('returns false when candidate is greater than value', () => {
+    const greaterThanTen = new Specifications.LessThanOrEqualTo(-10);
+
+    expect(greaterThanTen.isSatisfiedBy(-3)).toBeFalsy();
+  });
+});
+
