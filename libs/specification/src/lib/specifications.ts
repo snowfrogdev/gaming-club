@@ -1,4 +1,4 @@
-import { CompositeSpecification as Specifications } from "./abstractions/composite-specification";
+import { CompositeSpecification as Specifications } from './abstractions/composite-specification';
 
 export class GreaterThan extends Specifications<number> {
   constructor(private value: number) {
@@ -33,5 +33,14 @@ export class LessThanOrEqualTo extends Specifications<number> {
   }
   isSatisfiedBy(candidate: number): boolean {
     return candidate <= this.value;
+  }
+}
+
+export class Between extends Specifications<number> {
+  constructor(private min: number, private max: number) {
+    super();
+  }
+  isSatisfiedBy(candidate: number): boolean {
+    return candidate >= this.min && candidate <= this.max;
   }
 }
