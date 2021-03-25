@@ -1,7 +1,8 @@
-import { Specification } from "./specification";
+import { Specification, Visitor } from './specification';
 
 export abstract class CompositeSpecification<T> implements Specification<T> {
   abstract isSatisfiedBy(candidate: T): boolean;
+  abstract accept<R>(visitor: Visitor<R>): R;
 
   and(other: Specification<T>): Specification<T> {
     return new AndSpecification<T>(this, other);
@@ -20,18 +21,25 @@ export abstract class CompositeSpecification<T> implements Specification<T> {
   }
 }
 
-class AndSpecification<T> extends CompositeSpecification<T> {
-  constructor(private left: Specification<T>, private right: Specification<T>) {
+export class AndSpecification<T> extends CompositeSpecification<T> {
+  constructor(readonly left: Specification<T>, readonly right: Specification<T>) {
     super();
   }
 
   isSatisfiedBy(candidate: T): boolean {
     return this.left.isSatisfiedBy(candidate) && this.right.isSatisfiedBy(candidate);
   }
+
+  accept<R>(visitor: Visitor<R>): R {
+    return visitor.visitAndSpecification(this);
+  }
 }
 
-class AndNotSpecification<T> extends CompositeSpecification<T> {
-  constructor(private left: Specification<T>, private right: Specification<T>) {
+export class AndNotSpecification<T> extends CompositeSpecification<T> {
+  accept<R>(visitor: Visitor<R>): R {
+    throw new Error('Method not implemented.');
+  }
+  constructor(readonly left: Specification<T>, readonly right: Specification<T>) {
     super();
   }
 
@@ -40,7 +48,10 @@ class AndNotSpecification<T> extends CompositeSpecification<T> {
   }
 }
 
-class OrSpecification<T> extends CompositeSpecification<T> {
+export class OrSpecification<T> extends CompositeSpecification<T> {
+  accept<R>(visitor: Visitor<R>): R {
+    throw new Error('Method not implemented.');
+  }
   constructor(private left: Specification<T>, private right: Specification<T>) {
     super();
   }
@@ -50,7 +61,10 @@ class OrSpecification<T> extends CompositeSpecification<T> {
   }
 }
 
-class OrNotSpecification<T> extends CompositeSpecification<T> {
+export class OrNotSpecification<T> extends CompositeSpecification<T> {
+  accept<R>(visitor: Visitor<R>): R {
+    throw new Error('Method not implemented.');
+  }
   constructor(private left: Specification<T>, private right: Specification<T>) {
     super();
   }
@@ -60,7 +74,10 @@ class OrNotSpecification<T> extends CompositeSpecification<T> {
   }
 }
 
-class NotSpecification<T> extends CompositeSpecification<T> {
+export class NotSpecification<T> extends CompositeSpecification<T> {
+  accept<R>(visitor: Visitor<R>): R {
+    throw new Error('Method not implemented.');
+  }
   constructor(private other: Specification<T>) {
     super();
   }
