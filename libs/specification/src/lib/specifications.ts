@@ -54,13 +54,15 @@ export class LessThanOrEqualTo extends CompositeSpecification<number> {
 }
 
 export class Between extends CompositeSpecification<number> {
-  accept<R>(visitor: Visitor<R>): R {
-    throw new Error('Method not implemented.');
-  }
   constructor(readonly min: number, readonly max: number) {
     super();
   }
+  
   isSatisfiedBy(candidate: number): boolean {
     return candidate >= this.min && candidate <= this.max;
+  }
+
+  accept<R>(visitor: Visitor<R>): R {
+    return visitor.visitBetween(this);
   }
 }

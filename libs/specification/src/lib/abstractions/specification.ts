@@ -1,5 +1,5 @@
-import { GreaterThan, LessThan } from "../specifications";
-import { AndSpecification } from "./composite-specification";
+import { Between, GreaterThan, LessThan } from "../specifications";
+import { AndNotSpecification, AndSpecification } from "./composite-specification";
 
 export interface Specification<T> {
   isSatisfiedBy(candidate: T): boolean;
@@ -13,6 +13,8 @@ export interface Specification<T> {
 
 export interface Visitor<R> {
   visitAndSpecification<T>(specification: AndSpecification<T>): R;
+  visitAndNotSpecification<T>(specification: AndNotSpecification<T>): R;
   visitGreaterThan(specification: GreaterThan): R;
   visitLessThan(specification: LessThan): R;
+  visitBetween(specification: Between): R;
 }
