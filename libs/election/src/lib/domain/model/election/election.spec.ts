@@ -50,7 +50,7 @@ describe('Election', () => {
   });
 
   test('constructor should throw if nomination period start is the past', () => {
-    const now = () => new Date(2022, 1);
+    const now = () => new Date(2022, 0);
     const command = new TriggerElection(
       new ClubId('1'),
       new MemberId('1'),
