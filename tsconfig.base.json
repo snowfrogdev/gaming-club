@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gaming-club/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@gaming-club/election": ["libs/election/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
