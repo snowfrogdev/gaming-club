@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "http://localhost:5001/gaming-club-a11b7/us-central1",
-    "secure": false,
-    "logLevel": "debug"
-  }
-}

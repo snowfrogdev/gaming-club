@@ -15,11 +15,5 @@
       "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "projects": {
-    "game-voting": { "tags": [] },
-    "game-voting-e2e": { "tags": [], "implicitDependencies": ["game-voting"] },
-    "api": { "tags": [] },
-    "api-interfaces": { "tags": [] },
-    "specification": { "tags": [] }
-  }
+  "projects": { "specification": { "tags": [] } }
 }
